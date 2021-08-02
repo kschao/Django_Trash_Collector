@@ -15,3 +15,6 @@ class Customer(models.Model):
     balance = models.IntegerField(default=0)
     suspend_start = models.DateField(null=True)
     suspend_finish = models.DateField(null=True)
+
+    def __str__(self):
+        return self.name + " " + self.zipcode
