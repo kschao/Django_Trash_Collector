@@ -57,4 +57,21 @@ def edit(request, customer_id):
     else:
         return render(request, 'customer/edit.html')
 
+def change_pickup_day(request):
+    customer = Customer.objects.get(user=request.user)
+    if request.method == "POST":
+        new_pickup_day = request.POST.get('change_pickup_day')
+        customer. pickup_day = new_pickup_day
+        customer.save()
+        return HttpResponseRedirect(reverse('customers.index'))
+    else:
+        context = {
+            'customer': customer
+        }
+        return render(request, 'customer/change.html', context)
 
+def one_time_pickup(request):
+    pass
+
+def suspension_request(request):
+    pass
