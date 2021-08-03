@@ -44,6 +44,17 @@ def create(request):
 def detail(request, customer_id):
     customer_from_db = Customer.objects.get(pk=customer_id)
     return render(request, 'customer/detail.html', {'customer': customer_from_db})
-    
+
+def edit(request, customer_id):
+    customer_from_db = Customer.objects.get(pk=customer_id)
+    if request.method == 'POST':
+        customer_from_db.name = request.POST.get('name')
+        customer_from_db.address = request.POST.get('address')
+        customer_from_db.zip_code = request.POST.get('zip_code')
+        customer_from_db.weekly_pickup_day = request.POST.get('weekly_pickup_day')
+        customer_from_db.one_time_pickup = request.POST.get('one_time_pickup')
+        return HttpResponseRedirect(reverse('customer:index'))
+    else:
+        return render(request, 'customer/edit.html')
 
 
