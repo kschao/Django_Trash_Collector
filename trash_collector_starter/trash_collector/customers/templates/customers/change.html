@@ -1,1 +1,16 @@
-<!===== 
+<form action="{% url 'customers:weekly_pickup_day' %}" method="post">
+
+    <div class="alert alert-warning" role="alert">
+        Please select a new pickup day
+    </div>
+        <select class="form-select" name="weekly_pickup_day" id="weekly_pickup_day">
+            <option value="Sunday">Sunday</option>
+            <option value="Monday">Monday</option>
+            <option value="Tuesday">Tuesday</option>
+            <option value="Wednesday">Wednesday</option>
+            <option value="Thursday">Thursday</option>
+            <option value="Friday">Friday</option>
+            <option value="Saturday">Saturday</option>
+        </select><br>
+        <button type="submit" class="btn btn-primary">Submit</button>
+</form>
