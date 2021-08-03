@@ -40,3 +40,10 @@ def create(request):
         return HttpResponseRedirect (reverse('customer:details'))
     else:
         return render(request, 'customer/create.html')
+    
+def detail(request, customer_id):
+    customer_from_db = Customer.objects.get(pk=customer_id)
+    return render(request, 'customer/detail.html', {'customer': customer_from_db})
+    
+
+

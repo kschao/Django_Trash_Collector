@@ -17,4 +17,4 @@ class Customer(models.Model):
     suspend_finish = models.DateField(null=True)
 
     def __str__(self):
-        return self.name + " " + self.zipcode
+        return self.name + " " + self.zip_code
