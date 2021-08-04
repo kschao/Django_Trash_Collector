@@ -1,3 +1,4 @@
+from trash_collector_starter.trash_collector.customers.models import Customer
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.apps import apps
@@ -47,4 +48,15 @@ def view_daily(request):
         for customer in all_customers:
             if customer.zip_code == logged_in_employee.zipcode and customer.pickup_day == weekday and customer.suspension_start == False or customer.onetime_pickup == weekday:
                 my_customers.append(customer)
-    return render(request, 'employees/filter.html')
+    return render(request, 'employees/filterDays.html')
+
+def pickup_confirm(request, customer_id):
+    if request.method == "POST":
+        Customer = apps.get_model('customers.Customer')
+        customer = Customer.onjects.get(id=customer_id)
+        customer.balance += 5
+        customer.save()
+        return HttpResponseRedirect(reverse('employees:index'))
+    else:
+        return render(request, 'employees/filterDays.html.')
+        
