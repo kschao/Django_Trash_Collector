@@ -37,13 +37,13 @@ def create(request):
         weekly_pickup_day = request.POST.get('weekly_pickup_day')
         new_customer = Customer(user=user, name=name, address=address, zip_code=zip_code, weekly_pickup_day=weekly_pickup_day)
         new_customer.save()
-        return HttpResponseRedirect (reverse('customer:details'))
+        return HttpResponseRedirect (reverse('customers:details'))
     else:
-        return render(request, 'customer/create.html')
+        return render(request, 'customers/create.html')
     
 def detail(request, customer_id):
     customer_from_db = Customer.objects.get(pk=customer_id)
-    return render(request, 'customer/detail.html', {'customer': customer_from_db})
+    return render(request, 'customers/detail.html', {'customers': customer_from_db})
 
 def edit(request, customer_id):
     customer_from_db = Customer.objects.get(pk=customer_id)
@@ -53,25 +53,45 @@ def edit(request, customer_id):
         customer_from_db.zip_code = request.POST.get('zip_code')
         customer_from_db.weekly_pickup_day = request.POST.get('weekly_pickup_day')
         customer_from_db.one_time_pickup = request.POST.get('one_time_pickup')
-        return HttpResponseRedirect(reverse('customer:index'))
+        return HttpResponseRedirect(reverse('customers:index'))
     else:
-        return render(request, 'customer/edit.html')
+        return render(request, 'customers/edit.html')
 
 def change_pickup_day(request):
     customer = Customer.objects.get(user=request.user)
     if request.method == "POST":
         new_pickup_day = request.POST.get('change_pickup_day')
-        customer. pickup_day = new_pickup_day
+        customer.pickup_day = new_pickup_day
         customer.save()
-        return HttpResponseRedirect(reverse('customers.index'))
+        return HttpResponseRedirect(reverse('customers:index'))
     else:
         context = {
             'customer': customer
         }
-        return render(request, 'customer/change.html', context)
+        return render(request, 'customers/change.html', context)
 
 def one_time_pickup(request):
-    pass
+    customer = Customer.objects.get(user=request.user)
+    if request.method == "POST":
+        pickup_date = request.POST.get('one_time_pickup')
+        customer.one_time_pickup = pickup_date
+        customer.save()
+        return HttpResponseRedirect(reverse('customers:index'))
+    else:
+        context = {
+            'customer': customer
+        }
+        return render(request, 'customers/one_time_pickup.html', context)
 
 def suspension_request(request):
-    pass
+    customer = Customer.objects.get(user=request.user)
+    if request.methond == "POST":
+        customer.suspend_start = request.POST.get('suspend_start')
+        customer.suspend_end = request.POST.get('suspend_end')
+        customer.save()
+        return HttpResponseRedirect(reverse('customers:index'))
+    else:
+        context = {
+            'customer': customer 
+        }
+        return render(request, 'customers/suspension_request.html', context)
