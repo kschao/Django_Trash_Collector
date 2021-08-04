@@ -37,9 +37,9 @@ def create(request):
         weekly_pickup_day = request.POST.get('weekly_pickup_day')
         new_customer = Customer(user=user, name=name, address=address, zip_code=zip_code, weekly_pickup_day=weekly_pickup_day)
         new_customer.save()
-        return HttpResponseRedirect (reverse('customers:detail'))
+        return HttpResponseRedirect (reverse('customers:details'))
     else:
-        return render(request, 'customers/index.html')
+        return render(request, 'customers/create.html')
     
 def detail(request, customer_id):
     customer_from_db = Customer.objects.get(pk=customer_id)
@@ -95,3 +95,4 @@ def suspension_request(request):
             'customer': customer 
         }
         return render(request, 'customers/suspension_request.html', context)
+
