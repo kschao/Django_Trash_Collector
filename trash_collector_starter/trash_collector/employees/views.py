@@ -16,10 +16,10 @@ def index(request):
     user = request.user
     try:
         log_in_employee = Employees.objects.get(user=user)
-        except:
-            return HttpResponseRedirect(reverse('employee:create'))
-        context = {
-            'log_in_employee': lod_in_employee,
+    except:
+        return HttpResponseRedirect(reverse('employee:create'))           
+    context = {
+            'log_in_employee': log_in_employee,
             'all_customers': all_customers,
             }
     return render(request, 'employees/index.html', context)
@@ -46,7 +46,7 @@ def view_daily(request):
     my_customers = []
     if request.method == "POST":
         for customer in all_customers:
-            if customer.zip_code == logged_in_employee.zipcode and customer.pickup_day == weekday and customer.suspension_start == False or customer.onetime_pickup == weekday:
+            if customer.zip_code == log_in_employee.zipcode and customer.pickup_day == weekday and customer.suspension_start == False or customer.onetime_pickup == weekday:
                 my_customers.append(customer)
     return render(request, 'employees/filterDays.html')
 
