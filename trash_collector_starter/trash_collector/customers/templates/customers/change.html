@@ -1,3 +1,10 @@
+{% extends'base.html %}
+
+{% block title %} Change Customer Info {% endblock %}
+
+{% block header %} Change Customer Info  {% endblock %}
+
+{% block content %}
 <form action="{% url 'customers:weekly_pickup_day' %}" method="post">
 
     <div class="alert alert-warning" role="alert">
@@ -14,3 +21,4 @@
         </select><br>
         <button type="submit" class="btn btn-primary">Submit</button>
 </form>
+{% endblock %}
