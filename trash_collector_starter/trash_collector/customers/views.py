@@ -37,9 +37,9 @@ def create(request):
         weekly_pickup_day = request.POST.get('weekly_pickup_day')
         new_customer = Customer(user=user, name=name, address=address, zip_code=zip_code, weekly_pickup_day=weekly_pickup_day)
         new_customer.save()
-        return HttpResponseRedirect (reverse('customers:details'))
+        return HttpResponseRedirect (reverse('customers:detail'))
     else:
-        return render(request, 'customers/create.html')
+        return render(request, 'customers/index.html')
     
 def detail(request, customer_id):
     customer_from_db = Customer.objects.get(pk=customer_id)
