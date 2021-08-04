@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %} Suspension Request {% endblock %}
+{% block header %} Suspension Request {% endblock %}
+
+{% block content %}
+
+<div class="alert alert-warning" role="alert">
+        Please select a suspenstion start and end date
+</div>
+
+<!-- TODO: NEED TO COME BACK TO THE DATES LATER! -->
+
+<form name="suspension_request_form" action="{% url 'customers:suspension_request' %}" method="post">
+    {% csrf_token %}
+    start_date: <input type="date" name="suspension_start" id="suspension_start" value="" min="" max=""><br>
+    stop_date: <input type="date" name="suspension_start" id="suspension_start" value="" min="" max=""><br>
+        <button type="submit">Submit</button>
+    </form>  
+   
+{% endblock %}
