@@ -12,7 +12,7 @@ class Customer(models.Model):
     zip_code = models.CharField(max_length=25)
     weekly_pickup_day = models.CharField(max_length=50)
     one_time_pickup = models.DateField(null=True)
-    balance = models.IntegerField(default=0)
+    balance = models.IntegerField(null=True)
     suspend_start = models.DateField(null=True)
     suspend_finish = models.DateField(null=True)
 
