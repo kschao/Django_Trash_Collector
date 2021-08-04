@@ -15,12 +15,12 @@ def index(request):
     all_customers = Customer.objects.all()
     user = request.user
     try:
-        log_in_employee = Employees.obnjects.get(user=user)
+        log_in_employee = Employees.objects.get(user=user)
         except:
             return HttpResponseRedirect(reverse('employee:create'))
         context = {
             'log_in_employee': lod_in_employee,
-            'all_custmoers': all_customers,
+            'all_customers': all_customers,
             }
     return render(request, 'employees/index.html', context)
 
