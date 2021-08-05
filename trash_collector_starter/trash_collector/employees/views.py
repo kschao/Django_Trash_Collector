@@ -1,4 +1,3 @@
-from trash_collector_starter.trash_collector.customers.models import Customer
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.apps import apps
