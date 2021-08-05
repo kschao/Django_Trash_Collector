@@ -2,14 +2,19 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{% block title %}{% endblock %}</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" integrity="undefined" crossorigin="anonymous">
+  <style>
+    body {
+      background-color: rgb(223, 137, 24);
+    }
+    </style>
 </head>
 <body>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
-      <a class="navbar-brand" href="{% url 'home' %}">Trash Collector</a>
+      <a class="navbar-brand" href="{% url 'home' %}"><h1 style="border: 2px solid rgb(253, 253, 253);">Trash Collector</h1></a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target='#navbarText" aria-controls="navbarText" aria-expanded="false' aria-label="Toggle navigation">
        <span class="navbar-toggler-icon"></span>
       </button>
@@ -32,7 +37,7 @@
     <li class="nav-item">
       <a class="nav-link" href="{% url 'customers:one_time_pickup' %}">One-time Pickup</a>
     </li>
-  
+    
     {% elif group.name == "Employees" %}
     <p>Employee Navbar</p>
     <li class="nav-item">
@@ -42,16 +47,31 @@
       <a class="nav-link" href="{% url 'employees:filter' %}">Filter Days</a>
     </li>
     {% endif %}
+  </ul>
   {% endfor %}
-  <p><a href="{% url 'logout' %}">Log Out</a></p>
+  <span class="navbar-text">
+    Welcome{{user.username}}
+  </span>
+  {% endif %}
+      </div>
+    </div>
+  </nav>
+  <div class="container">
+    {% if user.is_authenticated %}
+  {% for group in user.groups.all%}
+    {% if group.name == "Customers" %}
+
+    {% elif group.name == "Employees" %}
+    {% endif %}
+  {% endfor %}
 {% endif %}
   <main>
     <h1>{% block header %} {% endblock %}</h1>
     {% block content %}
     {% endblock %}
-  </main>
-  <div> <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+    </main> 
   </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
 </body>
 </html>
 {# This is the parent template that should be extended by any other view you create #}
