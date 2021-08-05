@@ -1,4 +1,3 @@
-from trash_collector_starter.trash_collector.customers.models import Customer
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.apps import apps
@@ -53,7 +52,7 @@ def view_daily(request):
 def pickup_confirm(request, customer_id):
     if request.method == "POST":
         Customer = apps.get_model('customers.Customer')
-        customer = Customer.onjects.get(id=customer_id)
+        customer = Customer.objects.get(id=customer_id)
         customer.balance += 5
         customer.save()
         return HttpResponseRedirect(reverse('employees:index'))
