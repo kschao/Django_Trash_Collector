@@ -45,7 +45,7 @@ def view_daily(request):
     my_customers = []
     if request.method == "POST":
         for customer in all_customers:
-            if customer.zip_code == log_in_employee.zipcode and customer.pickup_day == weekday and customer.suspension_start == False or customer.onetime_pickup == weekday:
+            if customer.zip_code == log_in_employee.zip_code and customer.pickup_day == weekday and customer.suspend_start == False or customer.onetime_pickup == weekday:
                 my_customers.append(customer)
     return render(request, 'employees/filterDays.html')
 
