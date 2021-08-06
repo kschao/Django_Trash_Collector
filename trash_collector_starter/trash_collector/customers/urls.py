@@ -7,7 +7,7 @@ from . import views
 app_name = "customers"
 urlpatterns = [
     path('', views.index, name="index"),
-    path('new/', views.create, name='register'),
+    path('new_customer/', views.create, name='register'),
     path('change_pickup_day/', views.change_pickup_day, name='change_pickup_day'),
     path('one_time_pickup/', views.one_time_pickup, name='one_time_pickup'),
     path('suspend_start/', views.suspension_request, name='suspend_start'),

@@ -29,18 +29,19 @@ def index(request):
 
 # User info registration
 def create(request):
-    if request.method == "POST":
+    if request.method == 'POST':
         user = request.user
         name = request.POST.get('name')
         address = request.POST.get('address')
         zip_code = request.POST.get('zip_code')
-        weekly_pickup_day = request.POST.get('weekly_pickup_day')
-        new_customer = Customer(user=user, name=name, address=address, zip_code=zip_code, weekly_pickup_day=weekly_pickup_day)
+        pickup_day = request.POST.get('pickup_day')
+        new_customer = Customer(user=user, name=name, address=address, zip_code=zip_code, pickup_day=pickup_day)
         new_customer.save()
-        return HttpResponseRedirect (reverse('customers:details'))
+        return HttpResponseRedirect(reverse('customers:index'))
     else:
         return render(request, 'customers/create.html')
     
+
 def detail(request, customer_id):
     customer_from_db = Customer.objects.get(pk=customer_id)
     return render(request, 'customers/detail.html', {'customers': customer_from_db})
