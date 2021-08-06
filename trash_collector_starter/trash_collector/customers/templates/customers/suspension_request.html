@@ -13,8 +13,8 @@
 
 <form name="suspension_request_form" action="{% url 'customers:suspension_request' %}" method="post">
     {% csrf_token %}
-    start_date: <input type="date" name="suspension_start" id="suspension_start" value="" min="" max=""><br>
-    stop_date: <input type="date" name="suspension_start" id="suspension_start" value="" min="" max=""><br>
+    start_date: <input type="date" name="suspension_start" id="suspension_start" value="08/06/2021" min="08/05/2021" max="12/31/2021"><br>
+    stop_date: <input type="date" name="suspension_start" id="suspension_start" value="08/06/2021" min="08/05/2021" max="12/31/2021"><br>
         <button type="submit">Submit</button>
     </form>  
    
